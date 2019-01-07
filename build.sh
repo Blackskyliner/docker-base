@@ -1,5 +1,9 @@
 #!/bin/sh
 
+# We use /bin/sh in here instead of /bin/bash
+# so it can be used by any builing system.
+
+# Fail on error
 set -e
 
 # This function will take: 
