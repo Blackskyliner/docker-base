@@ -3,7 +3,8 @@ FROM centos:$DOCKER_CENTOS_VERSION
 
 # First time update and fastmirror
 RUN set -e \
-    && yum -y update
+    && yum -y update \
+    && yum clean all && rm -rf /var/cache/yum
 
 # Disable the search for fast mirrors for later usages
 RUN set -e \
