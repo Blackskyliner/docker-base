@@ -8,5 +8,5 @@ source /base-entrypoint.sh
 # As we are running as root per default we tell them.
 # Other entrypoint overwrites should also consider to
 # echoing the executing user they are running with.
-echo "Executing as root: "$@
-exec $@
+echo "Executing as root: " "$@"
+exec "$@"
