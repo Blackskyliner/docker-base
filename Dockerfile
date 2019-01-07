@@ -1,6 +1,7 @@
 ARG DOCKER_CENTOS_VERSION=latest
 FROM centos:$DOCKER_CENTOS_VERSION
 
+# Disable the search for fast mirrors
 RUN set -e \
     && sed -i 's/enabled=1/enabled=0/g' /etc/yum/pluginconf.d/fastestmirror.conf
 
@@ -22,12 +23,20 @@ RUN set -e \
     && chmod 0755 /opt/application \
     && chown -R application:application /opt/application
 
+# Install our entrypoints
 COPY base-entrypoint.sh /base-entrypoint.sh
 COPY entrypoint.sh /entrypoint.sh
+
+# Make sure our entrypoints are executable
 RUN chmod +x "/base-entrypoint.sh" "/entrypoint.sh"
 
-VOLUME [ "/opt/application" ]
+# Set the work directory to the application directory
 WORKDIR /opt/application
+
+# We do not set the application volume as this may break
+# Dockerfiles which bundle the whole application and want
+# only specific dirs get mounted as VOLUME.
+# VOLUME ["/opt/application"]
 
 ENTRYPOINT [ "/entrypoint.sh" ]
 CMD [ "/bin/bash" ]
