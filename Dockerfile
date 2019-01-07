@@ -1,7 +1,11 @@
 ARG DOCKER_CENTOS_VERSION=latest
 FROM centos:$DOCKER_CENTOS_VERSION
 
-# Disable the search for fast mirrors
+# First time update and fastmirror
+RUN set -e \
+    && yum -y update
+
+# Disable the search for fast mirrors for later usages
 RUN set -e \
     && sed -i 's/enabled=1/enabled=0/g' /etc/yum/pluginconf.d/fastestmirror.conf
 
