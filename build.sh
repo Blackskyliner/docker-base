@@ -31,3 +31,5 @@ buildImage(){
 # Base Images (latest and centos7 are rolling release versions)
 buildImage    .    Dockerfile    base/centos:latest    --build-arg DOCKER_CENTOS_VERSION=latest
 buildImage    .    Dockerfile    base/centos:7         --build-arg DOCKER_CENTOS_VERSION=7
+buildImage    .    ubuntu.Dockerfile    base/ubuntu:latest    --build-arg DOCKER_UBUNTU_VERSION=latest
+buildImage    .    ubuntu.Dockerfile    base/ubuntu:bionic    --build-arg DOCKER_UBUNTU_VERSION=bionic
