@@ -25,11 +25,14 @@ buildImage(){
     cd "$FOLDER"
         # Build and tag the file
         docker build --tag="$TAG" --file "$DOCKERFILE" "$@" .
+        docker push $TAG
     cd "$OLDPWD"
 }
 
-# Base Images (latest and centos7 are rolling release versions)
-buildImage    .    Dockerfile    base/centos:latest    --build-arg DOCKER_CENTOS_VERSION=latest
-buildImage    .    Dockerfile    base/centos:7         --build-arg DOCKER_CENTOS_VERSION=7
-buildImage    .    ubuntu.Dockerfile    base/ubuntu:latest    --build-arg DOCKER_UBUNTU_VERSION=latest
-buildImage    .    ubuntu.Dockerfile    base/ubuntu:bionic    --build-arg DOCKER_UBUNTU_VERSION=bionic
+# Build Images and tag them
+buildImage    .    Dockerfile    blackskyliner/base    --build-arg DOCKER_CENTOS_VERSION=latest
+buildImage    .    Dockerfile    blackskyliner/base:centos-latest    --build-arg DOCKER_CENTOS_VERSION=latest
+buildImage    .    Dockerfile    blackskyliner/base:centos-8    --build-arg DOCKER_CENTOS_VERSION=8
+buildImage    .    Dockerfile    blackskyliner/base:centos-7         --build-arg DOCKER_CENTOS_VERSION=7
+buildImage    .    ubuntu.Dockerfile    blackskyliner/base:ubuntu-latest    --build-arg DOCKER_UBUNTU_VERSION=latest
+buildImage    .    ubuntu.Dockerfile    blackskyliner/base:ubuntu-bionic    --build-arg DOCKER_UBUNTU_VERSION=bionic
