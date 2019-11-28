@@ -2,7 +2,6 @@ ARG DOCKER_CENTOS_VERSION=latest
 FROM centos:$DOCKER_CENTOS_VERSION
 
 RUN set -e \
-    && sed -i 's/enabled=1/enabled=0/g' /etc/yum/pluginconf.d/fastestmirror.conf \
     && yum -y install epel-release \
     && yum -y install yum-utils git openssh-clients unzip nmap-ncat wget \
     && yum clean all && rm -rf /var/cache/yum \
